@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Effect Damage Area", menuName = "Ability Effects/Damage Area")]
 public class AEDamageArea : AbilityEffect
 {
     [SerializeField] HitZone hitZonePrefab;

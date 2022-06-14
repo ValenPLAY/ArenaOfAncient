@@ -1,5 +1,7 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Effect Teleport", menuName = "Ability Effects/Teleport")]
+
 public class AETeleport : AbilityEffect
 {
     public float teleportDistance;
@@ -9,13 +11,9 @@ public class AETeleport : AbilityEffect
         base.ApplyEffect();
         CharacterController heroCharacterController = effectOwner.GetComponent<CharacterController>();
         Vector3 teleportVector = GameController.Instance.playerWorldMousePos - effectOwner.transform.position;
-
-        //Vector3 teleportHeightMove = Vector3.zero;
-        //teleportHeightMove.y = heroCharacterController.bounds.size.y;
-        //heroCharacterController.Move(teleportHeightMove);
-
         Vector3.Normalize(teleportVector);
+
+        if (teleportDistance == 0) teleportDistance = 1.0f;
         heroCharacterController.Move(teleportVector * teleportDistance);
-        //effectOwner.transform.position += teleportVector;
     }
 }

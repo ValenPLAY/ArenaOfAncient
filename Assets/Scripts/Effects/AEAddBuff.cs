@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Effect Add Buff", menuName = "Ability Effects/Add Buff")]
 public class AEAddBuff : AbilityEffect
 {
     //[SerializeField] bool isAddBuffToTarget;
@@ -14,9 +15,9 @@ public class AEAddBuff : AbilityEffect
         }
         else
         {
-            if (GameController.Instance.targetUnit != null)
+            if (GameController.Instance.TargetUnit != null)
             {
-                SpawnController.Instance.CreateBuff(GameController.Instance.targetUnit, appliedBuff);
+                SpawnController.Instance.CreateBuff(GameController.Instance.TargetUnit, appliedBuff);
             }
         }
     }

@@ -39,6 +39,8 @@ public class UIAbilityIcon : MonoBehaviour
     {
         correspondingAbility = connectingAbility;
         correspondingAbility.onCooldownPercentageChange += UpdateIconCooldown;
+        if (correspondingAbility.isActive == false) hotkeyTMP.gameObject.SetActive(false);
+        //Input.
     }
 
     public void UpdateUIIcon(Sprite sprite, int abilityID)
@@ -54,7 +56,23 @@ public class UIAbilityIcon : MonoBehaviour
     public void ShowDescPanel()
     {
         abilityDescPanel.SetActive(true);
-        abilityDescText.text = "<color=#ff7d19>" + correspondingAbility.getAbilityName() + "</color><br><br>" + correspondingAbility.getAbilityDesc();
+        abilityDescText.text = "<color=#ff7d19>" + correspondingAbility.getAbilityName() + "</color><br><br>";
+
+        if (correspondingAbility.cooldownDuration > 0)
+        {
+            abilityDescText.text += "<color=#E1D7CA>Cooldown: " + correspondingAbility.cooldownDuration + " sec</color><br>";
+        }
+        else
+        {
+            abilityDescText.text += "<color=#E1D7CA>Cooldown: Instant</color><br>";
+        }
+
+        if (correspondingAbility.energyCost > 0)
+        {
+            abilityDescText.text += "<color=#E1D7CA>Energy Cost: " + correspondingAbility.energyCost + "</color><br>";
+        }
+
+        abilityDescText.text += correspondingAbility.getAbilityDesc();
     }
 
     public void HideDescPanel()

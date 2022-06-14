@@ -42,9 +42,12 @@ public class ProjectileAddition : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (damage == 0) return;
+
         Unit collidedUnit = other.gameObject.GetComponent<Unit>();
         if (collidedUnit == null) return;
         if (collidedUnit == owner) return;
+
 
         owner.DealDamage(collidedUnit, damage);
 

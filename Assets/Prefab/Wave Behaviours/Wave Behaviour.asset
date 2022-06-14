@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 569a6e066f9615845b0933eec701f589, type: 3}
+  m_Name: Wave Behaviour
+  m_EditorClassIdentifier: 
+  waveUnitsToSpawn:
+  - {fileID: 2655612728377208991, guid: e032390ee93434a4a851c8b6d0fc79e4, type: 3}
+  - {fileID: 2655612728377208991, guid: f7a06a8f0bb226143aa9824903ce7a03, type: 3}
+  isScalingQuantity: 0
+  defaultQuantity: 0
+  isSpecificWaveSpawn: 0
+  specificWaveSpawn: 0
+  isSpawnEveryXRounds: 0
+  minimumWaveToUseBehaviour: 0
+  maximumWaveToUseBehaviour: 0

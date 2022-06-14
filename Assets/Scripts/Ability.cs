@@ -11,15 +11,19 @@ public class Ability : MonoBehaviour
 
 
     [Header("Active Parameters")]
-    [SerializeField] bool isActive;
+    public bool isActive;
     public float energyCost;
     [SerializeField] bool isOnCastUp;
 
-    [Header("Passive Parameters")]
+    [Header("Activation Parameters")]
     [SerializeField] bool isAutoCastPassive;
+    [SerializeField] bool isAutoCastOnAttack;
+    [SerializeField] bool isAutoCastOnDealDamage;
+    [SerializeField] bool isAutoCastOnKill;
+
 
     [Header("Cooldown Parameters")]
-    [SerializeField] protected float cooldownDuration;
+    public float cooldownDuration;
     protected float cooldownDurationCurrent;
     protected float CooldownDurationCurrent
     {
@@ -51,7 +55,6 @@ public class Ability : MonoBehaviour
         public bool isAppliedToTarget;
         public Buff buffToSpawn;
     }
-
     public List<SpawnableBuff> addableBuffsList = new List<SpawnableBuff>();
 
     [Header("Effect Modifiers")]
@@ -65,30 +68,49 @@ public class Ability : MonoBehaviour
         base.name = "Ability: " + objectName;
         owner = transform.parent.GetComponent<Hero>();
 
-        if (owner != null && PlayerUIController.Instance != null)
+        CreateIcon();
+        EventSubscribe();
+
+        //if ()
+    }
+
+    private void EventSubscribe()
+    {
+        if (owner == null) return;
+
+        if (isAutoCastOnAttack) owner.onUnitAttackEvent += AutoCastHandler;
+        if (isAutoCastOnDealDamage) owner.onUnitDealDamageEvent += AutoCastOnDealDamageHandler;
+        if (isAutoCastOnKill) owner.onUnitKilledTargetEvent += AutoCastHandler;
+    }
+
+    private void CreateIcon()
+    {
+        if (owner == null) return;
+        if (PlayerUIController.Instance == null) return;
+
+        correspondingIcon = Instantiate(PlayerUIController.Instance.basicAbilityIcon, PlayerUIController.Instance.abilitiesContainer.transform);
+        if (icon != null)
         {
-            correspondingIcon = Instantiate(PlayerUIController.Instance.basicAbilityIcon, PlayerUIController.Instance.abilitiesContainer.transform);
-
-            if (icon != null)
-            {
-                correspondingIcon.UpdateUIIcon(icon, 0);
-
-                //correspondingIcon.gameObject.SetActive(true);
-            }
-
-            correspondingIcon.ConnectIconToAbility(this);
-            CooldownDurationCurrent = cooldownDuration;
+            correspondingIcon.UpdateUIIcon(icon, 0);
         }
+
+        correspondingIcon.ConnectIconToAbility(this);
+        CooldownDurationCurrent = CooldownDurationCurrent;
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
-        if (CooldownDurationCurrent > 0) CooldownDurationCurrent -= Time.deltaTime;
-
-        if (isAutoCastPassive && CooldownDurationCurrent <= 0)
+        if (CooldownDurationCurrent <= 0)
         {
-            CastAbility();
+            if (isAutoCastPassive && owner.CurrentEnergy >= energyCost)
+            {
+                CastAbility();
+            }
+        }
+        else
+        {
+            CooldownDurationCurrent -= Time.deltaTime;
         }
     }
 
@@ -108,6 +130,16 @@ public class Ability : MonoBehaviour
         }
     }
 
+    void AutoCastHandler(Unit incomingUnit)
+    {
+        CastAbility();
+    }
+
+    void AutoCastOnDealDamageHandler(Unit dealingDamageUnit, Unit takingDamageUnit)
+    {
+        CastAbility();
+    }
+
     public virtual void CastAbility()
     {
         if (CooldownDurationCurrent > 0)
@@ -116,7 +148,7 @@ public class Ability : MonoBehaviour
             return;
         }
 
-        if (energyCost <= owner.Energy)
+        if (energyCost <= owner.CurrentEnergy)
         {
             foreach (AbilityEffect appliedEffect in effects)
             {
@@ -132,9 +164,9 @@ public class Ability : MonoBehaviour
                 }
                 else
                 {
-                    if (GameController.Instance.targetUnit != null)
+                    if (GameController.Instance.TargetUnit != null)
                     {
-                        SpawnController.Instance.CreateBuff(GameController.Instance.targetUnit, appliedBuff.buffToSpawn);
+                        SpawnController.Instance.CreateBuff(GameController.Instance.TargetUnit, appliedBuff.buffToSpawn);
                     }
                 }
             }
@@ -154,6 +186,8 @@ public class Ability : MonoBehaviour
         {
             Destroy(correspondingIcon);
         }
+
+        if (isAutoCastOnAttack && owner != null) owner.onUnitAttackEvent -= AutoCastHandler;
     }
 
     public virtual string getAbilityName()

@@ -1448,9 +1448,10 @@ GameObject:
   - component: {fileID: 2655612728377208993}
   - component: {fileID: 2655612728377208994}
   - component: {fileID: 2655612728377208990}
-  - component: {fileID: 2655612728377208991}
-  - component: {fileID: 5442273151351790430}
   - component: {fileID: 3247158838564414088}
+  - component: {fileID: 5442273151351790430}
+  - component: {fileID: 2655612728377208991}
+  - component: {fileID: 1481243661040310161}
   m_Layer: 6
   m_Name: Basic Skeleton
   m_TagString: Untagged
@@ -1510,42 +1511,26 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 1
---- !u!114 &2655612728377208991
-MonoBehaviour:
+--- !u!95 &3247158838564414088
+Animator:
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2655612728377208997}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6acc9c497b416e458151ca348739bba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unitName: Basic Enemy
-  unitDescription: Basic Enemy Description
-  unitIcon: {fileID: 21300000, guid: 3bdc7738f73cca842aff9c21e842a079, type: 3}
-  unitDeathEffect: {fileID: 6263282925942521950, guid: 6d736317f2b18e945a29fc7eb4a72a5a, type: 3}
-  unitHitEffect: {fileID: 1731427086125188337, guid: 1f292182eed25964f82767dde7554424, type: 3}
-  health: 8
-  healthRegeneration: 0
-  armor: 0
-  damage: 2
-  attackSpeed: 2
-  energy: 10
-  energyRegen: 0
-  attackRange: 0.3
-  movementSpeed: 3
-  movementSpeedBonus: 0
-  buffs: []
-  soundSpawn: {fileID: 8300000, guid: 60fbf4456955b494381d171ab5eb26e1, type: 3}
-  soundHit: {fileID: 8300000, guid: 816b58bc3dcd53a42863e048dde4cf24, type: 3}
-  soundDeath: {fileID: 8300000, guid: 6f3c1b72e6f2b0d41b86915db58bd181, type: 3}
-  soundAttack: {fileID: 0}
-  retargetMovingTargetDistance: 1
-  retargetDuration: 2
-  healthIncreasePerWave: 0
-  damageIncreasePerWave: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 72104f01cfb40674f8aed8b874763734, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &5442273151351790430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1600,23 +1585,54 @@ MonoBehaviour:
   - {fileID: 1491333856143539127}
   - {fileID: 1491333856143539079}
   - {fileID: 1491333856143539147}
---- !u!95 &3247158838564414088
-Animator:
-  serializedVersion: 4
+--- !u!114 &2655612728377208991
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2655612728377208997}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 72104f01cfb40674f8aed8b874763734, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6acc9c497b416e458151ca348739bba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitName: Basic Enemy
+  unitDescription: Basic Enemy Description
+  unitIcon: {fileID: 21300000, guid: 9a8e5ee91abbfd14a87d6ec32854be24, type: 3}
+  unitDeathEffect: {fileID: 6263282925942521950, guid: 6d736317f2b18e945a29fc7eb4a72a5a, type: 3}
+  unitHitEffect: {fileID: 1731427086125188337, guid: 1f292182eed25964f82767dde7554424, type: 3}
+  health: 8
+  currentHealthPercentage: 0
+  healthRegeneration: 0
+  armor: 0
+  damage: 2
+  attackSpeed: 2
+  energy: 10
+  energyRegen: 0
+  attackRange: 0.3
+  movementSpeed: 3
+  movementSpeedBonus: 0
+  buffs: []
+  soundSpawn: {fileID: 8300000, guid: 60fbf4456955b494381d171ab5eb26e1, type: 3}
+  soundHit: {fileID: 8300000, guid: 816b58bc3dcd53a42863e048dde4cf24, type: 3}
+  soundDeath: {fileID: 8300000, guid: 6f3c1b72e6f2b0d41b86915db58bd181, type: 3}
+  soundAttack: {fileID: 0}
+  lastDamageDealer: {fileID: 0}
+  retargetMovingTargetDistance: 1
+  retargetDuration: 2
+--- !u!114 &1481243661040310161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2655612728377208997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81ec1126f22978a4e966af40ddad05eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageIncreaseMultiplier: 0.2
+  healthIncreaseMultiplier: 0.2
+  movementSpeedIncreaseMultiplier: 0.2

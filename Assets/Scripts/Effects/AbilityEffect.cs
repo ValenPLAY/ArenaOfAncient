@@ -1,6 +1,8 @@
 using UnityEngine;
 
-public class AbilityEffect : MonoBehaviour
+
+
+public class AbilityEffect : ScriptableObject
 {
     [Header("Global Effect Variables")]
     [SerializeField] protected Unit effectOwner;
@@ -22,5 +24,10 @@ public class AbilityEffect : MonoBehaviour
     public virtual void ApplyEffect()
     {
         //if (effectOwner == null) return;
+    }
+
+    public virtual void DependenciesCheck()
+    {
+
     }
 }

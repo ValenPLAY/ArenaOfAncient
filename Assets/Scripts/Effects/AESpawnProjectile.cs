@@ -1,3 +1,7 @@
+
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "Spawn Projectile", menuName = "Ability Effects")]
 public class AESpawnProjectile : AbilityEffect
 {
     public Projectile spawnedProjectilePrefab;

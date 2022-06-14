@@ -20,9 +20,9 @@ public class AEAddModificator : AbilityEffect
         }
         else
         {
-            if (GameController.Instance.targetUnit != null)
+            if (GameController.Instance.TargetUnit != null)
             {
-                createdModificator = SpawnController.Instance.CreateModificator(appliedModificator, GameController.Instance.targetUnit);
+                createdModificator = SpawnController.Instance.CreateModificator(appliedModificator, GameController.Instance.TargetUnit);
             }
         }
 

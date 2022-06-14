@@ -310,10 +310,11 @@ MonoBehaviour:
   unitName: Basic Ranged Hero
   unitDescription: Basic ranged hero prefab with no additional abilities. Able to
     shoot giant white squares that deal 1 damage.
-  unitIcon: {fileID: 21300000, guid: 5b9177e1ad2c71d48b14014368003adf, type: 3}
+  unitIcon: {fileID: 21300000, guid: 516fb9bc6d926114ab9c10cce706b475, type: 3}
   unitDeathEffect: {fileID: 0}
   unitHitEffect: {fileID: 0}
   health: 10
+  currentHealthPercentage: 0
   healthRegeneration: 0
   armor: 0
   damage: 1
@@ -328,6 +329,7 @@ MonoBehaviour:
   soundHit: {fileID: 0}
   soundDeath: {fileID: 0}
   soundAttack: {fileID: 8300000, guid: 933792318ac4c9642b13cf900ac934f2, type: 3}
+  lastDamageDealer: {fileID: 0}
   startingAbilities: []
   abilities: []
   unitModel: {fileID: 6560078859746504412}

@@ -4,23 +4,10 @@ public class Modificator : MonoBehaviour
 {
 
     [Header("Modificator Settings")]
-    //[SerializeField] bool isPermanent;
-    //public bool isDurationAffectedByAnAbility;
-    //[SerializeField] float duration;
-    //public float Duration
-    //{
-    //    get => duration;
-    //    set
-    //    {
-    //        duration = value;
-    //        currentDuration = duration;
-    //    }
-    //}
-    //[SerializeField] float currentDuration;
-
     [Header("Health")]
     [SerializeField] float healthBonus;
     [SerializeField] float healthRegenBonus;
+    [SerializeField] float armorBonus;
     [Header("Damage")]
     [SerializeField] float damageBonus;
     [SerializeField] float attackSpeedBonus;
@@ -40,22 +27,6 @@ public class Modificator : MonoBehaviour
         ApplyModificator(modificatorOwner, true);
     }
 
-    //private void Update()
-    //{
-    //    if (!isPermanent && duration > 0)
-    //    {
-    //        if (currentDuration <= 0)
-    //        {
-    //            Destroy(gameObject);
-    //        }
-    //        else
-    //        {
-    //            currentDuration -= Time.deltaTime;
-    //        }
-    //    }
-    //}
-
-    //[SerializeField] protected bool isRequire
     public virtual void ApplyModificator(Unit modificatorOwner, bool state)
     {
         if (modificatorOwner == null) return;
@@ -72,6 +43,7 @@ public class Modificator : MonoBehaviour
 
         if (healthBonus != 0) modificatorOwner.HealthBonus += healthBonus * stateValue;
         if (healthRegenBonus != 0) modificatorOwner.HealthRegenerationBonus += healthRegenBonus * stateValue;
+        if (armorBonus != 0) modificatorOwner.ArmorBonus += armorBonus * stateValue;
         if (damageBonus != 0) modificatorOwner.DamageBonus += damageBonus * stateValue;
         if (attackSpeedBonus != 0) modificatorOwner.AttackSpeedBonus += attackSpeedBonus * stateValue;
         if (energyBonus != 0) modificatorOwner.EnergyBonus += energyBonus * stateValue;

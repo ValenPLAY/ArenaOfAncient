@@ -12,10 +12,13 @@ public class BasicProjectile : Projectile
     {
         base.OnTriggerEnter(other);
 
+        if (projectileDamage == 0) return;
+
         Unit hitUnit = other.gameObject.GetComponent<Unit>();
 
         if (hitUnit == null) return;
         if (hitUnit == projectileOwner) return;
+
 
         if (isDealDamageOnHit)
         {

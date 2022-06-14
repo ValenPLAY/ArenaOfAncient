@@ -90,8 +90,8 @@ MonoBehaviour:
   projectileSpeed: 1500
   projectileTimeToDestroy: 3
   onDeathEffectPrefab: {fileID: 0}
-  isDealDamageOnHit: 0
-  isDealDamageOnAfterEffect: 1
+  isDealDamageOnHit: 1
+  isDealDamageOnAfterEffect: 0
   additionIncreasedScale: 1
   isDestroyOnHit: 1
 --- !u!1 &8081361768451282024
